@@ -1,7 +1,7 @@
 Product
 =======
 
-.. automodule:: openerp.addons.magentoerpconnect.product
+.. automodule:: odoo.addons.magentoerpconnect.product
    :members:
    :undoc-members:
    :show-inheritance:

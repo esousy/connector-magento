@@ -33,7 +33,7 @@
 """,
  'images': [],
  'demo': [],
- 'data': ['magento_model_view.xml',
+ 'data': ['views/magento_model_view.xml',
           ],
  'installable': False,
  'application': False,

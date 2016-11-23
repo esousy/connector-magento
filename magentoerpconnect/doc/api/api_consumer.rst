@@ -1,7 +1,7 @@
 Consumers
 =========
 
-.. automodule:: openerp.addons.magentoerpconnect.consumer
+.. automodule:: odoo.addons.magentoerpconnect.consumer
    :members:
    :undoc-members:
    :show-inheritance:

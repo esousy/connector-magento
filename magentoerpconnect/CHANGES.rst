@@ -40,7 +40,7 @@ Changelog
 2.4.2 (2014-06-16)
 ~~~~~~~~~~~~~~~~~~
 
-* Fix: AssertionError: Several classes found for <class 'openerp.addons.connector.unit.mapper.ImportMapper'> with session <Session db_name: pruebas, uid: 1>, model name: magento.product.product. Found: set([<class 'openerp.addons.magentoerpconnect.product.IsActiveProductImportMapper'>, <class 'openerp.addons.magentoerpconnect.product.ProductImportMapper'>])
+* Fix: AssertionError: Several classes found for <class 'odoo.addons.connector.unit.mapper.ImportMapper'> with session <Session db_name: pruebas, uid: 1>, model name: magento.product.product. Found: set([<class 'odoo.addons.magentoerpconnect.product.IsActiveProductImportMapper'>, <class 'odoo.addons.magentoerpconnect.product.ProductImportMapper'>])
 
 2.4.1 (2014-06-10)
 ~~~~~~~~~~~~~~~~~~
@@ -61,7 +61,7 @@ Changelog
 * Added missing scheduler for import of products
 * Fix: calculate correctly the discount ratio on sales order lines (lp:1201590)
 * Possibility to exclude products from stock synchronizations
-* Products disabled on Magento are imported disabled on OpenERP. An additional module allows more options.
+* Products disabled on Magento are imported disabled on Odoo. An additional module allows more options.
 * Possibility to disable import of sales orders per storeview
 * Related Actions: open the form view on the record concerned by an export job, or open the Magento's admin page
   on importing jobs
@@ -82,11 +82,11 @@ Changelog
   and receives the full dictionary of values
 * Fix: wrong main image imported on products (https://launchpad.net/bugs/1258418)
 * Changes calls to Mapper according to the new API of the Mappers.
-  See branch: https://code.launchpad.net/~openerp-connector-core-editors/openerp-connector/7.0-connector-mapper-refactor
+  See branch: https://code.launchpad.net/~odoo-connector-core-editors/odoo-connector/7.0-connector-mapper-refactor
 * Fix: mismatch between tax excluding and tax including amount, new configuration option (https://launchpad.net/bugs/1234117)
 * Fix: mismatch between tax excluding and tax including amount, new configuration option (https://launchpad.net/bugs/1234117)
 * Implements the new API (connector_ecommerce) for the special order lines:
-  https://code.launchpad.net/~openerp-connector-core-editors/openerp-connector/7.0-e-commerce-addons-refactor-so-extra-lines/+merge/194629
+  https://code.launchpad.net/~odoo-connector-core-editors/odoo-connector/7.0-e-commerce-addons-refactor-so-extra-lines/+merge/194629
 
 
 2.2.1 (2013.11.22)
@@ -116,9 +116,9 @@ Changelog
   Especially to handle the b2b use cases better.
 * Fix: Magento bindings duplicated with the "copy" method (https://launchpad.net/bugs/1205239)
 * Fix: 503 Service unavailable protocol error should be retried later (https://launchpad.net/bugs/1194733)
-* Fix: Import of guest orders (https://bugs.launchpad.net/openerp-connector/+bug/1193239)
+* Fix: Import of guest orders (https://bugs.launchpad.net/odoo-connector/+bug/1193239)
 * 'Authorized' import rules to be able to import sales orders authorized by a payment institute but not paid yet. (Thanks to Brendan Clune)
-* Define the partners relationships only on the creation of new records, allowing manual specification of company / contact relationships within OpenERP (Thanks to Brendan Clune)
+* Define the partners relationships only on the creation of new records, allowing manual specification of company / contact relationships within Odoo (Thanks to Brendan Clune)
 * Fix: State information for partners not mapped correctly (Thanks to Brendan Clune) (https://launchpad.net/bugs/1183837)
 * Many others: see the bazaar logs
 

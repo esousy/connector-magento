@@ -1,7 +1,7 @@
 Sale
 ====
 
-.. automodule:: openerp.addons.magentoerpconnect.sale
+.. automodule:: odoo.addons.magentoerpconnect.sale
    :members:
    :undoc-members:
    :show-inheritance:

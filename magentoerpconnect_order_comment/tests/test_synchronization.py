@@ -19,16 +19,16 @@
 #
 ##############################################################################
 
-from openerp.addons.magentoerpconnect.tests.test_synchronization import (
+from odoo.addons.magentoerpconnect.tests.test_synchronization import (
     SetUpMagentoSynchronized)
-from openerp.addons.magentoerpconnect.tests.data_base import (
+from odoo.addons.magentoerpconnect.tests.data_base import (
     magento_base_responses)
-from openerp.addons.magentoerpconnect.unit.import_synchronizer import (
+from odoo.addons.magentoerpconnect.unit.import_synchronizer import (
     import_record)
-from openerp.addons.magentoerpconnect.tests.common import (
+from odoo.addons.magentoerpconnect.tests.common import (
     mock_api,
     mock_urlopen_image)
-from openerp.addons.magentoerpconnect.unit.export_synchronizer import (
+from odoo.addons.magentoerpconnect.unit.export_synchronizer import (
     export_record)
 
 
@@ -56,8 +56,8 @@ class TestMagentoSaleCommentImport(SetUpMagentoSynchronized):
             ])
         self.assertEqual(len(mag_order_ids), 1)
 
-        order = order_model.read(cr, uid, mag_order_ids[0], ['openerp_id'])
-        order_id = order['openerp_id'][0]
+        order = order_model.read(cr, uid, mag_order_ids[0], ['odoo_id'])
+        order_id = order['odoo_id'][0]
         comment_ids = self.registry('magento.sale.comment').search(cr, uid, [
             ('backend_id', '=', backend_id),
             ('res_id', '=', order_id)
@@ -108,8 +108,8 @@ class TestMagentoMoveComment(SetUpMagentoWithSaleOrder):
             ])
         self.assertEqual(len(mag_order_ids), 1)
 
-        order = order_model.read(cr, uid, mag_order_ids[0], ['openerp_id'])
-        order_id = order['openerp_id'][0]
+        order = order_model.read(cr, uid, mag_order_ids[0], ['odoo_id'])
+        order_id = order['odoo_id'][0]
 
         comment_ids = self.registry('magento.sale.comment').search(cr, uid, [
             ('backend_id', '=', backend_id),
@@ -140,7 +140,7 @@ class TestMagentoSaleCommentExport(SetUpMagentoWithSaleOrder):
             mail_message_model = self.registry('mail.message')
 
             comment_id = mail_message_model.create(cr, uid, {
-                'res_id': self.mag_order.openerp_id.id,
+                'res_id': self.mag_order.odoo_id.id,
                 'body': 'Test me I famous',
                 'model': 'sale.order',
                 'subtype_id': 1,
@@ -148,7 +148,7 @@ class TestMagentoSaleCommentExport(SetUpMagentoWithSaleOrder):
 
             mag_comment_id = mag_comment_model.search(cr, uid, [
                 ('backend_id', '=', self.backend_id),
-                ('openerp_id', '=', comment_id),
+                ('odoo_id', '=', comment_id),
                 ])[0]
 
             export_record(self.session, 'magento.sale.comment', mag_comment_id)

@@ -24,8 +24,8 @@ import logging
 import xmlrpclib
 
 import magento as magentolib
-from openerp.addons.connector.unit.backend_adapter import CRUDAdapter
-from openerp.addons.connector.exception import (NetworkRetryableError,
+from odoo.addons.connector.unit.backend_adapter import CRUDAdapter
+from odoo.addons.connector.exception import (NetworkRetryableError,
                                                 RetryableJobError)
 from datetime import datetime
 _logger = logging.getLogger(__name__)
@@ -218,7 +218,7 @@ class GenericAdapter(MagentoCRUDAdapter):
         arguments = [int(id)]
         if attributes:
             # Avoid to pass Null values in attributes. Workaround for
-            # https://bugs.launchpad.net/openerp-connector-magento/+bug/1210775
+            # https://bugs.launchpad.net/odoo-connector-magento/+bug/1210775
             # When Magento is installed on PHP 5.4 and the compatibility patch
             # http://magento.com/blog/magento-news/magento-now-supports-php-54
             # is not installed, calling info() with None in attributes

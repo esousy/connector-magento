@@ -1,7 +1,7 @@
 Connector
 =========
 
-.. automodule:: openerp.addons.magentoerpconnect.connector
+.. automodule:: odoo.addons.magentoerpconnect.connector
    :members:
    :undoc-members:
    :show-inheritance:

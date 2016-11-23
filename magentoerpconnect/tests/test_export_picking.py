@@ -19,8 +19,8 @@
 #
 ##############################################################################
 
-from openerp import _
-from openerp.addons.magentoerpconnect.unit.import_synchronizer import (
+from odoo import _
+from odoo.addons.magentoerpconnect.unit.import_synchronizer import (
     import_record)
 from .common import (mock_api,
                      mock_job_delay_to_direct,
@@ -50,7 +50,7 @@ class TestExportPicking(SetUpMagentoSynchronized):
         self.assertEquals(len(self.order_binding), 1)
         self.order_binding.ignore_exceptions = True
         # generate sale's picking
-        self.order_binding.openerp_id.action_button_confirm()
+        self.order_binding.odoo_id.action_button_confirm()
         self.picking = self.order_binding.picking_ids
         self.assertEquals(len(self.picking), 1)
         magento_shop = self.picking.sale_id.magento_bind_ids[0].store_id
@@ -59,7 +59,7 @@ class TestExportPicking(SetUpMagentoSynchronized):
     def test_export_complete_picking(self):
         """ Exporting a complete picking """
         self.picking.force_assign()
-        job_path = ('openerp.addons.magentoerpconnect.'
+        job_path = ('odoo.addons.magentoerpconnect.'
                     'stock_picking.export_picking_done')
         response = {
             'sales_order_shipment.create': 987654321,
@@ -104,7 +104,7 @@ class TestExportPicking(SetUpMagentoSynchronized):
         self.picking.pack_operation_ids[0].product_qty = 1
         self.picking.pack_operation_ids[1].product_qty = 0
 
-        job_path = ('openerp.addons.magentoerpconnect.'
+        job_path = ('odoo.addons.magentoerpconnect.'
                     'stock_picking.export_picking_done')
         response = {
             'sales_order_shipment.create': 987654321,
@@ -176,9 +176,9 @@ class TestExportPicking(SetUpMagentoSynchronized):
     def test_export_tracking_after_done(self):
         """ A tracking number is exported after the picking is done """
         self.picking.force_assign()
-        job_picking_path = ('openerp.addons.magentoerpconnect.'
+        job_picking_path = ('odoo.addons.magentoerpconnect.'
                             'stock_picking.export_picking_done')
-        job_tracking_path = ('openerp.addons.magentoerpconnect.'
+        job_tracking_path = ('odoo.addons.magentoerpconnect.'
                              'stock_tracking.export_tracking_number')
         response = {
             'sales_order_shipment.create': 987654321,

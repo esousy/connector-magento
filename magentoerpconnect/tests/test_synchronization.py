@@ -19,8 +19,8 @@
 #
 ##############################################################################
 
-from openerp.addons.connector.exception import InvalidDataError
-from openerp.addons.magentoerpconnect.unit.import_synchronizer import (
+from odoo.addons.connector.exception import InvalidDataError
+from odoo.addons.magentoerpconnect.unit.import_synchronizer import (
     import_batch,
     import_record)
 from .common import (mock_api,
@@ -211,7 +211,7 @@ class TestImportMagento(SetUpMagentoSynchronized):
             [('backend_id', '=', backend_id),
              ('magento_order_id', '=', mag_order.id)])
         self.assertEqual(len(mag_order_line), 1)
-        order_line = mag_order_line.openerp_id
+        order_line = mag_order_line.odoo_id
         price_unit = order_line.price_unit
         self.assertAlmostEqual(price_unit, 41.0500)
 
@@ -231,7 +231,7 @@ class TestImportMagento(SetUpMagentoSynchronized):
         mag_order = mag_order_model.search([('backend_id', '=', backend_id),
                                             ('magento_id', '=', '900000695')])
         self.assertEqual(len(mag_order), 1)
-        order = mag_order.openerp_id
+        order = mag_order.odoo_id
         amount_total = order.amount_total
         # 97.5 is the amount_total if connector takes correctly included
         # tax prices.
@@ -253,7 +253,7 @@ class TestImportMagento(SetUpMagentoSynchronized):
         mag_order = mag_order_model.search([('backend_id', '=', backend_id),
                                             ('magento_id', '=', '900000696')])
         self.assertEqual(len(mag_order), 1)
-        order = mag_order.openerp_id
+        order = mag_order.odoo_id
         self.assertAlmostEqual(order.amount_total, 36.9500)
 
         for line in order.order_line:

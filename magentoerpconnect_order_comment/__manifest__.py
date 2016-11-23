@@ -39,7 +39,7 @@ Features
 * Import sale comments in the same time than 'sale order'
 * Move messages from canceled order to replacing sale order (edited sale
   order in magento)
-* Export messages from OpenERP sale order to Magento comment
+* Export messages from Odoo sale order to Magento comment
 * Export of moved messages to Magento
 
 Settings / options
@@ -56,7 +56,7 @@ Settings / options
         'python': ['bs4'],
     },
     'data': [
-        'magento_model_view.xml',
+        'views/magento_model_view.xml',
     ],
     'installable': False,
     'application': False,

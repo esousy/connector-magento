@@ -42,7 +42,7 @@ install:
   - pip install magento
   - pip install beautifulsoup4
   - pip install sphinx sphinx_bootstrap_theme sphinx-intl odoo-sphinx-autodoc
-  - printf '[options]\n\nrunning_env = dev' > ${HOME}/.openerp_serverrc
+  - printf '[options]\n\nrunning_env = dev' > ${HOME}/.odoo_serverrc
 
 script:
   - if [ "$DOCS" != "1" ] ; then travis_run_tests; fi

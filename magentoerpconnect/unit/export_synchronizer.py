@@ -26,11 +26,11 @@ from datetime import datetime
 
 import psycopg2
 
-import openerp
-from openerp.tools.translate import _
-from openerp.addons.connector.queue.job import job, related_action
-from openerp.addons.connector.unit.synchronizer import Exporter
-from openerp.addons.connector.exception import (IDMissingInBackend,
+import odoo
+from odoo.tools.translate import _
+from odoo.addons.connector.queue.job import job, related_action
+from odoo.addons.connector.unit.synchronizer import Exporter
+from odoo.addons.connector.exception import (IDMissingInBackend,
                                                 RetryableJobError)
 from .import_synchronizer import import_record
 from .backend_adapter import MAGENTO_DATETIME_FORMAT
@@ -80,7 +80,7 @@ class MagentoBaseExporter(Exporter):
 
     def _should_import(self):
         """ Before the export, compare the update date
-        in Magento and the last sync date in OpenERP,
+        in Magento and the last sync date in Odoo,
         if the former is more recent, schedule an import
         to not miss changes done in Magento.
         """
@@ -95,13 +95,13 @@ class MagentoBaseExporter(Exporter):
         if not record['updated_at']:
             # in rare case it can be empty, in doubt, import it
             return False
-        sync_date = openerp.fields.Datetime.from_string(sync)
+        sync_date = odoo.fields.Datetime.from_string(sync)
         magento_date = datetime.strptime(record['updated_at'],
                                          MAGENTO_DATETIME_FORMAT)
         return sync_date < magento_date
 
-    def _get_openerp_data(self):
-        """ Return the raw OpenERP data for ``self.binding_id`` """
+    def _get_odoo_data(self):
+        """ Return the raw Odoo data for ``self.binding_id`` """
         return self.model.browse(self.binding_id)
 
     def run(self, binding_id, *args, **kwargs):
@@ -110,7 +110,7 @@ class MagentoBaseExporter(Exporter):
         :param binding_id: identifier of the binding record to export
         """
         self.binding_id = binding_id
-        self.binding_record = self._get_openerp_data()
+        self.binding_record = self._get_odoo_data()
 
         self.magento_id = self.binder.to_backend(self.binding_id)
         try:
@@ -197,8 +197,8 @@ class MagentoExporter(MagentoBaseExporter):
         record created by :meth:`_export_dependency`), resulting in:
 
             IntegrityError: duplicate key value violates unique
-            constraint "magento_product_product_openerp_uniq"
-            DETAIL:  Key (backend_id, openerp_id)=(1, 4851) already exists.
+            constraint "magento_product_product_odoo_uniq"
+            DETAIL:  Key (backend_id, odoo_id)=(1, 4851) already exists.
 
         In that case, we'll retry the import just later.
 
@@ -231,7 +231,7 @@ class MagentoExporter(MagentoBaseExporter):
                      dependency. The reason for that is that we pushed a record
                      on the backend and we absolutely have to keep its ID.
 
-                     So you *must* take care not to modify the OpenERP
+                     So you *must* take care not to modify the Odoo
                      database during an export, excepted when writing
                      back the external ID or eventually to store
                      external data that we have to keep on this side.
@@ -241,14 +241,14 @@ class MagentoExporter(MagentoBaseExporter):
                      in :meth:`~._export_dependencies`.
 
         :param relation: record to export if not already exported
-        :type relation: :py:class:`openerp.models.BaseModel`
+        :type relation: :py:class:`odoo.models.BaseModel`
         :param binding_model: name of the binding model for the relation
         :type binding_model: str | unicode
-        :param exporter_cls: :py:class:`openerp.addons.connector\
+        :param exporter_cls: :py:class:`odoo.addons.connector\
                                         .connector.ConnectorUnit`
                              class or parent class to use for the export.
                              By default: MagentoExporter
-        :type exporter_cls: :py:class:`openerp.addons.connector\
+        :type exporter_cls: :py:class:`odoo.addons.connector\
                                        .connector.MetaConnectorUnit`
         :param binding_field: name of the one2many field on a normal
                               record that points to the binding record
@@ -271,7 +271,7 @@ class MagentoExporter(MagentoBaseExporter):
         wrap = relation._model._name != binding_model
 
         if wrap and hasattr(relation, binding_field):
-            domain = [('openerp_id', '=', relation.id),
+            domain = [('odoo_id', '=', relation.id),
                       ('backend_id', '=', self.backend_record.id)]
             binding = self.env[binding_model].search(domain)
             if binding:
@@ -286,12 +286,12 @@ class MagentoExporter(MagentoBaseExporter):
             # depends.
             else:
                 bind_values = {'backend_id': self.backend_record.id,
-                               'openerp_id': relation.id}
+                               'odoo_id': relation.id}
                 if binding_extra_vals:
                     bind_values.update(binding_extra_vals)
                 # If 2 jobs create it at the same time, retry
                 # one later. A unique constraint (backend_id,
-                # openerp_id) should exist on the binding model
+                # odoo_id) should exist on the binding model
                 with self._retry_unique_violation():
                     binding = (self.env[binding_model]
                                .with_context(connector_no_export=True)
@@ -319,7 +319,7 @@ class MagentoExporter(MagentoBaseExporter):
 
     def _map_data(self):
         """ Returns an instance of
-        :py:class:`~openerp.addons.connector.unit.mapper.MapRecord`
+        :py:class:`~odoo.addons.connector.unit.mapper.MapRecord`
 
         """
         return self.mapper.map_record(self.binding_record)

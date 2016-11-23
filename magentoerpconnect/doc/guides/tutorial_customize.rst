@@ -35,7 +35,7 @@ Common Odoo files
 
 A ``magentoerpconnect`` customization module is like any Odoo module,
 so you will first need to create the **manifest**
-``customize_example/__openerp__.py``:
+``customize_example/__odoo__.py``:
 
 .. code-block:: python
    :emphasize-lines: 4,5
@@ -75,7 +75,7 @@ That's just a matter of following a convention and creating
 ``connector.py`` in which you will call the
 ``install_in_connector`` function::
 
-    from openerp.addons.connector.connector import install_in_connector
+    from odoo.addons.connector.connector import install_in_connector
 
 
     install_in_connector()
@@ -93,7 +93,7 @@ versions.
 Actually the supported versions are referenced in
 ``magentoerpconnect/backend.py``::
 
-    import openerp.addons.connector.backend as backend
+    import odoo.addons.connector.backend as backend
 
     magento = backend.Backend('magento')
     magento1700 = backend.Backend(parent=magento, version='1.7')
@@ -115,8 +115,8 @@ Magento, you need to:
 Let's create our own backend, in ``customize_example/backend.py``::
 
     # -*- coding: utf-8 -*-
-    import openerp.addons.connector.backend as backend
-    import openerp.addons.magentoerpconnect.backend as magento_backend
+    import odoo.addons.connector.backend as backend
+    import odoo.addons.magentoerpconnect.backend as magento_backend
 
     magento_myversion = backend.Backend(parent=magento_backend.magento1700,
                                         version='1.7-myversion')
@@ -124,7 +124,7 @@ Let's create our own backend, in ``customize_example/backend.py``::
 And in ``customize_example/magento_model.py``::
 
     # -*- coding: utf-8 -*-
-    from openerp import models, api
+    from odoo import models, api
 
 
     class MagentoBackend(models.Model):
@@ -264,7 +264,7 @@ which are peculiar to Magento.
 
 Example with an excerpt of the fields for ``magento.res.partner``:
 
-* ``openerp_id``: ``Many2one`` to the ``res.partner`` (``_inherits``)
+* ``odoo_id``: ``Many2one`` to the ``res.partner`` (``_inherits``)
 * ``backend_id``: ``Many2one`` to the ``magento.backend`` model (Magento
   Instance), for the partner this is a ``related`` because we already
   have a link to the website, itself associated to a ``magento.backend``.
@@ -307,7 +307,7 @@ For this field, the Magento API returns a string. I add it in
 the views')::
 
   # -*- coding: utf-8 -*-
-  from openerp import models, fields
+  from odoo import models, fields
 
   class MagentoResPartner(models.Model):
       _inherit = 'magento.res.partner'
@@ -318,7 +318,7 @@ the views')::
 In the same file, I add the import of the Magento Backend to use and the
 current mapper::
 
-  from openerp.addons.magentoerpconnect.partner import PartnerImportMapper
+  from odoo.addons.magentoerpconnect.partner import PartnerImportMapper
   from .backend import magento_myversion
 
 And I extend the partner's mapper, decorated with
@@ -352,7 +352,7 @@ this information can be useful at this level.
 In ``customize_example/partner.py``, I write::
 
   # -*- coding: utf-8 -*-
-  from openerp import models, fields
+  from odoo import models, fields
 
   class ResPartner(models.Model):
       _inherit = 'res.partner'
@@ -364,8 +364,8 @@ In ``customize_example/partner.py``, I write::
 The same imports than in the `Example 1.`_ are needed, but we need to
 import ``mapping`` too::
 
-  from openerp.addons.connector.unit.mapper import mapping
-  from openerp.addons.magentoerpconnect.partner import PartnerImportMapper
+  from odoo.addons.connector.unit.mapper import mapping
+  from odoo.addons.magentoerpconnect.partner import PartnerImportMapper
   from .backend import magento_myversion
 
 This is not a `direct` mapping, I will use a method to define the

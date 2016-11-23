@@ -1,7 +1,7 @@
 Invoice
 =======
 
-.. automodule:: openerp.addons.magentoerpconnect.invoice
+.. automodule:: odoo.addons.magentoerpconnect.invoice
    :members:
    :undoc-members:
    :show-inheritance:

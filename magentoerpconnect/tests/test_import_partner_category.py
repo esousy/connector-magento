@@ -19,7 +19,7 @@
 #
 ##############################################################################
 
-from openerp.addons.magentoerpconnect.unit.import_synchronizer import (
+from odoo.addons.magentoerpconnect.unit.import_synchronizer import (
     import_record)
 from .common import mock_api, SetUpMagentoSynchronized
 from .data_base import magento_base_responses
@@ -56,6 +56,6 @@ class TestPartnerCategory(SetUpMagentoSynchronized):
         category = binding_model.search([('backend_id', '=', backend_id),
                                          ('magento_id', '=', '2')])
         self.assertEqual(len(category), 1)
-        self.assertEqual(category.openerp_id, existing_category)
+        self.assertEqual(category.odoo_id, existing_category)
         self.assertEqual(category.name, 'Wholesale')
         self.assertEqual(category.tax_class_id, 3)

@@ -1,7 +1,7 @@
 Backend Adapters
 ================
 
-.. automodule:: openerp.addons.magentoerpconnect.unit.backend_adapter
+.. automodule:: odoo.addons.magentoerpconnect.unit.backend_adapter
    :members:
    :undoc-members:
    :show-inheritance:

@@ -1,7 +1,7 @@
 Delivery
 ========
 
-.. automodule:: openerp.addons.magentoerpconnect.delivery
+.. automodule:: odoo.addons.magentoerpconnect.delivery
    :members:
    :undoc-members:
    :show-inheritance:

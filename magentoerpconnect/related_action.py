@@ -28,8 +28,8 @@ When called on a job, they will return an action to the client.
 """
 
 import functools
-from openerp import exceptions, _
-from openerp.addons.connector import related_action
+from odoo import exceptions, _
+from odoo.addons.connector import related_action
 from .connector import get_environment
 from .unit.backend_adapter import GenericAdapter
 from .unit.binder import MagentoBinder

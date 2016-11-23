@@ -33,12 +33,12 @@ Magento Connector - Pricing
 
 Extension for **Magento Connector**.
 
-The prices of the products are managed in OpenERP using pricelists and
+The prices of the products are managed in Odoo using pricelists and
 are pushed to Magento.
 """,
  'images': [],
  'demo': [],
- 'data': ['magento_model_view.xml',
+ 'data': ['views/magento_model_view.xml',
           ],
  'installable': False,
  'application': False,

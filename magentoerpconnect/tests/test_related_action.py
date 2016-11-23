@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 import mock
 
-import openerp
-import openerp.tests.common as common
-from openerp.addons.connector.queue.job import (
+import odoo
+import odoo.tests.common as common
+from odoo.addons.connector.queue.job import (
     Job,
-    OpenERPJobStorage,
+    OdooJobStorage,
 )
-from openerp.addons.connector.session import (
+from odoo.addons.connector.session import (
     ConnectorSession)
 from .common import mock_api
 from .data_base import magento_base_responses
@@ -43,7 +43,7 @@ class TestRelatedActionStorage(common.TransactionCase):
         """ Open a related action opening an unwrapped binding """
         product = self.env.ref('product.product_product_7')
         magento_product = self.MagentoProduct.create(
-            {'openerp_id': product.id,
+            {'odoo_id': product.id,
              'backend_id': self.backend.id})
         stored = self._create_job(export_record, 'magento.product.product',
                                   magento_product.id)
@@ -59,7 +59,7 @@ class TestRelatedActionStorage(common.TransactionCase):
 
     def _create_job(self, func, *args):
         job = Job(func=func, args=args)
-        storage = OpenERPJobStorage(self.session)
+        storage = OdooJobStorage(self.session)
         storage.store(job)
         stored = self.QueueJob.search([('uuid', '=', job.uuid)])
         self.assertEqual(len(stored), 1)
@@ -84,5 +84,5 @@ class TestRelatedActionStorage(common.TransactionCase):
         self.backend.refresh()
         stored = self._create_job(import_record, 'magento.product.product',
                                   self.backend.id, 123456)
-        with self.assertRaises(openerp.exceptions.Warning):
+        with self.assertRaises(odoo.exceptions.Warning):
             stored.open_related_action()

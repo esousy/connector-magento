@@ -43,7 +43,7 @@ line or adding them in the Odoo server configuration file.
 
 Example using the command line argument::
 
-    $ /path/to/openerp-server --addons-path /path/to/connector,/path/to/connector-ecommerce,/path/to/connector-magento,/path/to/e-commerce,/path/to/product-attribute,/path/to/sale-workflow
+    $ /path/to/odoo-server --addons-path /path/to/connector,/path/to/connector-ecommerce,/path/to/connector-magento,/path/to/e-commerce,/path/to/product-attribute,/path/to/sale-workflow
 
 You also need to install the ``magento`` Python package.
 So install it with either pip or either easy_install::
@@ -77,7 +77,7 @@ In order to install it:
 
 1. Move the `Openlabs` folder in the
    `magento_root/app/code/community`.
-#. Move the file `app/etc/modules/Openlabs_OpenERPConnector.xml` in
+#. Move the file `app/etc/modules/Openlabs_OdooConnector.xml` in
    `magento_root/app/etc/modules`.
 #. Flush the Magento cache from the admin panel or by removing everything in
    `magento_root/var/cache`
@@ -93,10 +93,10 @@ Configuring the Magento web-services
 
 1. In the Magento admin panel, go to `System > Web-Services >
    SOAP/XML-RPC - Roles`.
-#. Create a new role named `openerp` with access to `All` resources.
+#. Create a new role named `odoo` with access to `All` resources.
 #. In `System > Web-Services > SOAP/XML-RPC - Users`, create a new user
-   named as you want, for instance `openerp_connect`, and an API key.
-   In `User Role`, choose the `openerp` role.
+   named as you want, for instance `odoo_connect`, and an API key.
+   In `User Role`, choose the `odoo` role.
 
 
 **********************

@@ -20,9 +20,9 @@
 ##############################################################################
 
 import mock
-from openerp.addons.magentoerpconnect.unit.import_synchronizer import (
+from odoo.addons.magentoerpconnect.unit.import_synchronizer import (
     import_record)
-import openerp.tests.common as common
+import odoo.tests.common as common
 from .common import (mock_api,
                      mock_urlopen_image,
                      SetUpMagentoSynchronized,
@@ -57,19 +57,19 @@ class TestSaleOrder(SetUpMagentoSynchronized):
     def test_copy_quotation(self):
         """ Copy a sales order with copy_quotation move bindings """
         binding = self._import_sale_order(900000691)
-        order = binding.openerp_id
+        order = binding.odoo_id
         action = order.copy_quotation()
         new_id = action['res_id']
         self.assertFalse(order.magento_bind_ids)
-        self.assertEqual(binding.openerp_id.id, new_id)
+        self.assertEqual(binding.odoo_id.id, new_id)
         for mag_line in binding.magento_order_line_ids:
             self.assertEqual(mag_line.order_id.id, new_id)
 
     def test_cancel_delay_job(self):
         """ Cancel an order, delay a cancel job """
         binding = self._import_sale_order(900000691)
-        order = binding.openerp_id
-        patched = 'openerp.addons.magentoerpconnect.sale.export_state_change'
+        order = binding.odoo_id
+        patched = 'odoo.addons.magentoerpconnect.sale.export_state_change'
         # patch the job so it won't be created and we will be able
         # to check if it is called
         with mock.patch(patched) as mock_export_state_change:
@@ -84,9 +84,9 @@ class TestSaleOrder(SetUpMagentoSynchronized):
     def test_cancel_export(self):
         """ Export the cancel state """
         binding = self._import_sale_order(900000691)
-        order = binding.openerp_id
+        order = binding.odoo_id
         # patch the job so it won't be created
-        patched = 'openerp.addons.magentoerpconnect.sale.export_state_change'
+        patched = 'odoo.addons.magentoerpconnect.sale.export_state_change'
         with mock.patch(patched):
             order.action_cancel()
         response = {
@@ -110,24 +110,24 @@ class TestSaleOrder(SetUpMagentoSynchronized):
     def test_copy_quotation_delay_export_state(self):
         """ Delay a state export on new copy from canceled order """
         binding = self._import_sale_order(900000691)
-        order = binding.openerp_id
+        order = binding.odoo_id
 
         # cancel the order
-        patched = 'openerp.addons.magentoerpconnect.sale.export_state_change'
+        patched = 'odoo.addons.magentoerpconnect.sale.export_state_change'
         with mock.patch(patched):
             # cancel the sales order, a job exporting the cancel status
             # to Magento is normally created (muted here)
             order.action_cancel()
 
         SaleOrder = self.registry('sale.order')
-        patched = 'openerp.addons.magentoerpconnect.sale.export_state_change'
+        patched = 'odoo.addons.magentoerpconnect.sale.export_state_change'
         with mock.patch(patched) as mock_export_state_change:
             # create a copy of quotation, the new order should be linked to
             # the Magento sales order
             action = SaleOrder.copy_quotation(self.cr, self.uid, [order.id])
             new_id = action['res_id']
             binding.refresh()
-            order = binding.openerp_id
+            order = binding.odoo_id
             self.assertEqual(order.id, new_id)
 
             called = mock_export_state_change.delay
@@ -139,11 +139,11 @@ class TestSaleOrder(SetUpMagentoSynchronized):
     def test_copy_quotation_export_state(self):
         """ Export a new state on new copy from canceled order """
         binding = self._import_sale_order(900000691)
-        order = binding.openerp_id
+        order = binding.odoo_id
         SaleOrder = self.registry('sale.order')
 
         # cancel the order
-        patched = 'openerp.addons.magentoerpconnect.sale.export_state_change'
+        patched = 'odoo.addons.magentoerpconnect.sale.export_state_change'
         with mock.patch(patched):
             # cancel the sales order, a job exporting the cancel status
             # to Magento is normally created (muted here)
@@ -154,7 +154,7 @@ class TestSaleOrder(SetUpMagentoSynchronized):
             action = SaleOrder.copy_quotation(self.cr, self.uid, [order.id])
             new_id = action['res_id']
             binding.refresh()
-            order = binding.openerp_id
+            order = binding.odoo_id
             self.assertEqual(order.id, new_id)
 
         # we will check if the correct messages are sent to Magento

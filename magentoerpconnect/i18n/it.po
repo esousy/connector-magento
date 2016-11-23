@@ -61,8 +61,8 @@ msgstr "Un indirizzo di un partner può avere solo un collegamento per ogni back
 #: help:magento.backend,sale_prefix:0
 msgid ""
 "A prefix put before the name of imported sales orders.\n"
-"For instance, if the prefix is 'mag-', the sales order 100000692 in Magento, will be named 'mag-100000692' in OpenERP."
-msgstr "Un prefisso messo prima del nome degli ordini di vendita importati.\nPer esempio, se il prefisso è 'mag-', l'ordine di vendita con numero 100000692 su Magento, verrà chiamato 'mag-100000692' in OpenERP."
+"For instance, if the prefix is 'mag-', the sales order 100000692 in Magento, will be named 'mag-100000692' in Odoo."
+msgstr "Un prefisso messo prima del nome degli ordini di vendita importati.\nPer esempio, se il prefisso è 'mag-', l'ordine di vendita con numero 100000692 su Magento, verrà chiamato 'mag-100000692' in Odoo."
 
 #. module: magentoerpconnect
 #: view:magento.backend:magentoerpconnect.view_magento_backend_form
@@ -470,7 +470,7 @@ msgstr "Opzioni di inventario"
 
 #. module: magentoerpconnect
 #: model:ir.model,name:magentoerpconnect.model_account_invoice
-#: field:magento.account.invoice,openerp_id:0
+#: field:magento.account.invoice,odoo_id:0
 msgid "Invoice"
 msgstr "Fattura"
 
@@ -868,12 +868,12 @@ msgstr "Parziale"
 
 #. module: magentoerpconnect
 #: model:ir.model,name:magentoerpconnect.model_res_partner
-#: field:magento.address,openerp_id:0 field:magento.res.partner,openerp_id:0
+#: field:magento.address,odoo_id:0 field:magento.res.partner,odoo_id:0
 msgid "Partner"
 msgstr "Partner"
 
 #. module: magentoerpconnect
-#: field:magento.res.partner.category,openerp_id:0
+#: field:magento.res.partner.category,odoo_id:0
 msgid "Partner Category"
 msgstr "Categoria del partner"
 
@@ -904,16 +904,16 @@ msgstr "Metodo di picking"
 
 #. module: magentoerpconnect
 #: field:connector.config.settings,module_magentoerpconnect_pricing:0
-msgid "Prices are managed in OpenERP with pricelists"
-msgstr "I prezzi sono gestiti in OpenERP con i listini prezzi"
+msgid "Prices are managed in Odoo with pricelists"
+msgstr "I prezzi sono gestiti in Odoo con i listini prezzi"
 
 #. module: magentoerpconnect
 #: help:connector.config.settings,module_magentoerpconnect_pricing:0
 msgid ""
-"Prices are set in OpenERP and exported to Magento.\n"
+"Prices are set in Odoo and exported to Magento.\n"
 "\n"
 "This installs the module magentoerpconnect_pricing."
-msgstr "I prezzi vengono impostati su OpenERP ed esportati su Magento.\n\nQuesto installa il modulo magentoerpconnect_pricing."
+msgstr "I prezzi vengono impostati su Odoo ed esportati su Magento.\n\nQuesto installa il modulo magentoerpconnect_pricing."
 
 #. module: magentoerpconnect
 #: field:magento.storeview,catalog_price_tax_included:0
@@ -922,13 +922,13 @@ msgstr "I prezzi includono le tasse"
 
 #. module: magentoerpconnect
 #: model:ir.model,name:magentoerpconnect.model_product_product
-#: field:magento.product.product,openerp_id:0
+#: field:magento.product.product,odoo_id:0
 msgid "Product"
 msgstr "Prodotto"
 
 #. module: magentoerpconnect
 #: model:ir.model,name:magentoerpconnect.model_product_category
-#: field:magento.product.category,openerp_id:0
+#: field:magento.product.category,odoo_id:0
 msgid "Product Category"
 msgstr "Categoria prodotto"
 
@@ -951,12 +951,12 @@ msgid "Record exported with ID %s on Magento."
 msgstr "Il record è stato esportato con ID %s su Magento"
 
 #. module: magentoerpconnect
-#: field:magento.sale.order,openerp_id:0
+#: field:magento.sale.order,odoo_id:0
 msgid "Sale Order"
 msgstr "Ordine di vendita"
 
 #. module: magentoerpconnect
-#: field:magento.sale.order.line,openerp_id:0
+#: field:magento.sale.order.line,odoo_id:0
 msgid "Sale Order Line"
 msgstr "Linea dell'ordine di vendita"
 
@@ -1018,16 +1018,16 @@ msgstr "Spedizione creata"
 #. module: magentoerpconnect
 #: help:payment.method,create_invoice_on:0
 msgid ""
-"Should the invoice be created in Magento when it is validated or when it is paid in OpenERP?\n"
+"Should the invoice be created in Magento when it is validated or when it is paid in Odoo?\n"
 "If nothing is set, the option falls back to the same option on the Magento store related to the sales order."
 msgstr ""
 
 #. module: magentoerpconnect
 #: help:magento.store,create_invoice_on:0
 msgid ""
-"Should the invoice be created in Magento when it is validated or when it is paid in OpenERP?\n"
+"Should the invoice be created in Magento when it is validated or when it is paid in Odoo?\n"
 "This only takes effect if the sales order's related payment method is not giving an option for this by itself. (See Payment Methods)"
-msgstr "La fattura dovrebbe essere creata in Magento quando viene validata o pagata su OpenERP?\nQuesto ha effetto se il metodo di pagamento legato all'ordine di vendita non fornisce già un'opzione per questo (Vedi i metodi di pagamento)"
+msgstr "La fattura dovrebbe essere creata in Magento quando viene validata o pagata su Odoo?\nQuesto ha effetto se il metodo di pagamento legato all'ordine di vendita non fornisce già un'opzione per questo (Vedi i metodi di pagamento)"
 
 #. module: magentoerpconnect
 #: field:magento.storeview,sort_order:0 field:magento.website,sort_order:0
@@ -1046,7 +1046,7 @@ msgid "Stock Field"
 msgstr ""
 
 #. module: magentoerpconnect
-#: field:magento.stock.picking,openerp_id:0
+#: field:magento.stock.picking,odoo_id:0
 msgid "Stock Picking"
 msgstr ""
 
@@ -1087,14 +1087,14 @@ msgstr "Aliquota fiscale"
 #. module: magentoerpconnect
 #: model:sale.exception,description:magentoerpconnect.excep_wrong_total_amount
 msgid ""
-"The amount computed in OpenERP doesn't match with the amount in Magento.\n"
+"The amount computed in Odoo doesn't match with the amount in Magento.\n"
 "\n"
 "Cause:\n"
-"The taxes are probably different between OpenERP and Magento. A fiscal position could have changed the final price.\n"
+"The taxes are probably different between Odoo and Magento. A fiscal position could have changed the final price.\n"
 "\n"
 "Resolution:\n"
 "Check your taxes and fiscal positions configuration and correct them if necessary."
-msgstr "Il totale calcolato su OpenERP non corrisponde alla quantità su Magento.\nCausa:\nLe tasse sono probabilmente differenti tra OpenERP e Magento. Una posizione fiscale  potrebbe aver cambiato il prezzo finale.\nSoluzione:\nControlla la configurazione delle tue tasse e delle tue posizioni fiscali e correggile se necessario."
+msgstr "Il totale calcolato su Odoo non corrisponde alla quantità su Magento.\nCausa:\nLe tasse sono probabilmente differenti tra Odoo e Magento. Una posizione fiscale  potrebbe aver cambiato il prezzo finale.\nSoluzione:\nControlla la configurazione delle tue tasse e delle tue posizioni fiscali e correggile se necessario."
 
 #. module: magentoerpconnect
 #: code:addons/magentoerpconnect/stock_tracking.py:80
@@ -1106,9 +1106,9 @@ msgstr "Il trasportatore %s non esporta i numeri di tracciamento."
 #: code:addons/magentoerpconnect/product.py:558
 #, python-format
 msgid ""
-"The configurable product is not imported in OpenERP, because only the simple"
+"The configurable product is not imported in Odoo, because only the simple"
 " products are used in the sales orders."
-msgstr "Il prodotto configurabile non è importato in OpenERP, perchè solo i prodotti semplici vengono usati negli ordini di vendita"
+msgstr "Il prodotto configurabile non è importato in Odoo, perchè solo i prodotti semplici vengono usati negli ordini di vendita"
 
 #. module: magentoerpconnect
 #: help:magento.backend,use_custom_api_path:0
@@ -1121,14 +1121,14 @@ msgstr "Il path predefinito del API è  '/index.php/api/xmlrpc''. Seleziona ques
 #. module: magentoerpconnect
 #: model:sale.exception,description:magentoerpconnect.excep_wrong_total_amount_tax
 msgid ""
-"The tax amount computed in OpenERP doesn't match with the tax amount in Magento.\n"
+"The tax amount computed in Odoo doesn't match with the tax amount in Magento.\n"
 "\n"
 "Cause:\n"
-"The taxes are probably different between OpenERP and Magento. A fiscal position could have changed the final price.\n"
+"The taxes are probably different between Odoo and Magento. A fiscal position could have changed the final price.\n"
 "\n"
 "Resolution:\n"
 "Check your taxes and fiscal positions configuration and correct them if necessary."
-msgstr "Il totale delle tasse calcolato su OpenERP non corrisponde al totale delle tasse su Magento.\nCausa:\nLe tasse sono probabilmente differenti tra OpenERP e Magento. Una posizione fiscale  potrebbe aver cambiato il prezzo finale.\nSoluzione:\nControlla la configurazione delle tue tasse e delle tue posizioni fiscali e correggile se necessario."
+msgstr "Il totale delle tasse calcolato su Odoo non corrisponde al totale delle tasse su Magento.\nCausa:\nLe tasse sono probabilmente differenti tra Odoo e Magento. Una posizione fiscale  potrebbe aver cambiato il prezzo finale.\nSoluzione:\nControlla la configurazione delle tue tasse e delle tue posizioni fiscali e correggile se necessario."
 
 #. module: magentoerpconnect
 #: help:connector.config.settings,module_magentoerpconnect_export_partner:0

@@ -23,14 +23,14 @@ import urllib2
 import mock
 from base64 import b64encode
 
-from openerp.addons.magentoerpconnect.unit.import_synchronizer import (
+from odoo.addons.magentoerpconnect.unit.import_synchronizer import (
     import_batch, import_record)
-from openerp.addons.connector.session import ConnectorSession
-import openerp.tests.common as common
+from odoo.addons.connector.session import ConnectorSession
+import odoo.tests.common as common
 from .common import mock_api, MockResponseImage
 from .data_base import magento_base_responses
 from .data_product import simple_product_and_images
-from openerp.addons.magentoerpconnect.product import (
+from odoo.addons.magentoerpconnect.product import (
     CatalogImageImporter,
     ProductProductAdapter,
 )

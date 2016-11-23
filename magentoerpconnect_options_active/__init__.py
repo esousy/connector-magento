@@ -19,5 +19,4 @@
 #
 ##############################################################################
 
-from . import magento_model
-from . import product
+from . import models

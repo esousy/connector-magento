@@ -21,10 +21,10 @@
 
 import mock
 
-import openerp.tests.common as common
-from openerp import _
-from openerp.addons.connector.session import ConnectorSession
-from openerp.addons.magentoerpconnect.unit.import_synchronizer import (
+import odoo.tests.common as common
+from odoo import _
+from odoo.addons.connector.session import ConnectorSession
+from odoo.addons.magentoerpconnect.unit.import_synchronizer import (
     import_batch,
     import_record)
 from .common import (mock_api,
@@ -79,8 +79,8 @@ class TestExportInvoice(common.TransactionCase):
         self.mag_sale = sales
         # ignore exceptions on the sale order
         self.mag_sale.ignore_exceptions = True
-        self.mag_sale.openerp_id.action_button_confirm()
-        sale = self.mag_sale.openerp_id
+        self.mag_sale.odoo_id.action_button_confirm()
+        sale = self.mag_sale.odoo_id
         invoice_id = sale.action_invoice_create()
         assert invoice_id
         self.invoice_model = self.env['account.invoice']
@@ -93,7 +93,7 @@ class TestExportInvoice(common.TransactionCase):
         self.stores.write({'create_invoice_on': 'open'})
         # this is the consumer called when a 'magento.account.invoice'
         # is created, it delay a job to export the invoice
-        patched = 'openerp.addons.magentoerpconnect.invoice.export_invoice'
+        patched = 'odoo.addons.magentoerpconnect.invoice.export_invoice'
         # mock.patch prevents to create the job
         with mock.patch(patched) as export_invoice:
             self._invoice_open()
@@ -117,7 +117,7 @@ class TestExportInvoice(common.TransactionCase):
         self.stores.write({'create_invoice_on': 'paid'})
         # this is the consumer called when a 'magento.account.invoice'
         # is created, it delay a job to export the invoice
-        patched = 'openerp.addons.magentoerpconnect.invoice.export_invoice'
+        patched = 'odoo.addons.magentoerpconnect.invoice.export_invoice'
         # mock.patch prevents to create the job
         with mock.patch(patched) as export_invoice:
             self._invoice_open()
@@ -142,7 +142,7 @@ class TestExportInvoice(common.TransactionCase):
         self.stores.write({'create_invoice_on': 'paid'})
         # this is the consumer called when a 'magento.account.invoice'
         # is created, it delay a job to export the invoice
-        patched = 'openerp.addons.magentoerpconnect.invoice.export_invoice'
+        patched = 'odoo.addons.magentoerpconnect.invoice.export_invoice'
         # mock.patch prevents to create the job
         with mock.patch(patched) as export_invoice:
             self._invoice_open()
@@ -168,7 +168,7 @@ class TestExportInvoice(common.TransactionCase):
         self.stores.write({'create_invoice_on': 'open'})
         # this is the consumer called when a 'magento.account.invoice'
         # is created, it delay a job to export the invoice
-        patched = 'openerp.addons.magentoerpconnect.invoice.export_invoice'
+        patched = 'odoo.addons.magentoerpconnect.invoice.export_invoice'
         # mock.patch prevents to create the job
         with mock.patch(patched) as export_invoice:
             self._invoice_open()
@@ -200,7 +200,7 @@ class TestExportInvoice(common.TransactionCase):
 
     def test_export_invoice_api(self):
         """ Exporting an invoice: call towards the Magento API """
-        job_path = ('openerp.addons.magentoerpconnect.'
+        job_path = ('odoo.addons.magentoerpconnect.'
                     'invoice.export_invoice')
         response = {
             'sales_order_invoice.create': 987654321,

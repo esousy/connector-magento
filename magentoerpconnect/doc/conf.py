@@ -42,7 +42,7 @@ def add_path(*paths):
         os.path.join(*paths)
     )
 
-add_path(odoo_root, 'openerp', 'addons')
+add_path(odoo_root, 'odoo', 'addons')
 add_path(odoo_root, 'addons')
 add_path(build_path)
 
@@ -264,7 +264,7 @@ html_static_path = ['_static']
 # html_file_suffix = None
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'openerp-magento-connector-doc'
+htmlhelp_basename = 'odoo-magento-connector-doc'
 
 
 # -- Options for LaTeX output ------------------------------------------
@@ -283,7 +283,7 @@ latex_elements = {
 # Grouping the document tree into LaTeX files. List of tuples (source
 # start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-    ('index', 'openerp-magento-connector.tex',
+    ('index', 'odoo-magento-connector.tex',
      u'Odoo Magento Connector Documentation',
      u'Odoo Community Association (OCA)', 'manual'),
 ]
@@ -314,7 +314,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'openerp-magento-connector',
+    ('index', 'odoo-magento-connector',
      u'Odoo Magento Connector Documentation',
      [u'Odoo Community Association (OCA)'], 1)
 ]
@@ -350,7 +350,7 @@ texinfo_documents = [
 # library.
 intersphinx_mapping = {
     'python': ('http://docs.python.org/2.7', None),
-    'openerpweb': ('https://www.odoo.com/documentation/8.0/', None),
-    'openerpdev': ('https://www.odoo.com/documentation/8.0/', None),
-    'openerpconnector': ('http://www.odoo-connector.com', None),
+    'odooweb': ('https://www.odoo.com/documentation/8.0/', None),
+    'odoodev': ('https://www.odoo.com/documentation/8.0/', None),
+    'odooconnector': ('http://www.odoo-connector.com', None),
 }

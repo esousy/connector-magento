@@ -39,7 +39,7 @@ customer accounts.
 """,
  'images': [],
  'demo': [],
- 'data': ['partner_view.xml',
+ 'data': ['views/partner_view.xml',
           ],
  'installable': False,
  'application': False,

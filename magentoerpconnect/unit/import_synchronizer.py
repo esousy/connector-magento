@@ -32,11 +32,11 @@ are already bound, to update the last sync date.
 """
 
 import logging
-from openerp import fields, _
-from openerp.addons.connector.queue.job import job, related_action
-from openerp.addons.connector.connector import ConnectorUnit
-from openerp.addons.connector.unit.synchronizer import Importer
-from openerp.addons.connector.exception import IDMissingInBackend
+from odoo import fields, _
+from odoo.addons.connector.queue.job import job, related_action
+from odoo.addons.connector.connector import ConnectorUnit
+from odoo.addons.connector.unit.synchronizer import Importer
+from odoo.addons.connector.exception import IDMissingInBackend
 from ..backend import magento
 from ..connector import get_environment, add_checkpoint
 from ..related_action import link
@@ -66,7 +66,7 @@ class MagentoImporter(Importer):
 
     def _is_uptodate(self, binding):
         """Return True if the import should be skipped because
-        it is already up-to-date in OpenERP"""
+        it is already up-to-date in Odoo"""
         assert self.magento_record
         if not self.magento_record.get('updated_at'):
             return  # no update date on Magento, always import it.
@@ -96,11 +96,11 @@ class MagentoImporter(Importer):
         :param magento_id: id of the related binding to import
         :param binding_model: name of the binding model for the relation
         :type binding_model: str | unicode
-        :param importer_cls: :class:`openerp.addons.connector.\
+        :param importer_cls: :class:`odoo.addons.connector.\
                                      connector.ConnectorUnit`
                              class or parent class to use for the export.
                              By default: MagentoImporter
-        :type importer_cls: :class:`openerp.addons.connector.\
+        :type importer_cls: :class:`odoo.addons.connector.\
                                     connector.MetaConnectorUnit`
         :param always: if True, the record is updated even if it already
                        exists, note that it is still skipped if it has
@@ -114,7 +114,7 @@ class MagentoImporter(Importer):
         if importer_class is None:
             importer_class = MagentoImporter
         binder = self.binder_for(binding_model)
-        if always or binder.to_openerp(magento_id) is None:
+        if always or binder.to_odoo(magento_id) is None:
             importer = self.unit_for(importer_class, model=binding_model)
             importer.run(magento_id)
 
@@ -128,7 +128,7 @@ class MagentoImporter(Importer):
 
     def _map_data(self):
         """ Returns an instance of
-        :py:class:`~openerp.addons.connector.unit.mapper.MapRecord`
+        :py:class:`~odoo.addons.connector.unit.mapper.MapRecord`
 
         """
         return self.mapper.map_record(self.magento_record)
@@ -158,13 +158,13 @@ class MagentoImporter(Importer):
         return
 
     def _get_binding(self):
-        return self.binder.to_openerp(self.magento_id, browse=True)
+        return self.binder.to_odoo(self.magento_id, browse=True)
 
     def _create_data(self, map_record, **kwargs):
         return map_record.values(for_create=True, **kwargs)
 
     def _create(self, data):
-        """ Create the OpenERP record """
+        """ Create the Odoo record """
         # special check on data before import
         self._validate_data(data)
         model = self.model.with_context(connector_no_export=True)
@@ -176,7 +176,7 @@ class MagentoImporter(Importer):
         return map_record.values(**kwargs)
 
     def _update(self, binding, data):
-        """ Update an OpenERP record """
+        """ Update an Odoo record """
         # special check on data before import
         self._validate_data(data)
         binding.with_context(connector_no_export=True).write(data)
@@ -353,11 +353,11 @@ class AddCheckpoint(ConnectorUnit):
                    'magento.product.category',
                    ]
 
-    def run(self, openerp_binding_id):
-        binding = self.model.browse(openerp_binding_id)
-        record = binding.openerp_id
+    def run(self, odoo_binding_id):
+        binding = self.model.browse(odoo_binding_id)
+        record = binding.odoo_id
         add_checkpoint(self.session,
-                       record._model._name,
+                       record._name,
                        record.id,
                        self.backend_record.id)
 

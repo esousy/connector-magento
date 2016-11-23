@@ -30,7 +30,7 @@ registered on this event. Those functions are called ``Consumers``.
 
 In ``magentoerpconnect/consumer.py``, some consumers are already
 defined. You can add your one, it should be decorated by
-:py:func:`openerp.addons.magentoerpconnect.consumer.magento_consumer` and by the event
+:py:func:`odoo.addons.magentoerpconnect.consumer.magento_consumer` and by the event
 which has to fire it::
 
     @on_record_write(model_names=['my.model'])
@@ -130,9 +130,9 @@ First, we create the model::
     class MagentoResPartnerCategory(models.Model):
         _name = 'magento.res.partner.category'
         _inherit = 'magento.binding'
-        _inherits = {'res.partner.category': 'openerp_id'}
+        _inherits = {'res.partner.category': 'odoo_id'}
 
-        openerp_id = fields.Many2one(comodel_name='res.partner.category',
+        odoo_id = fields.Many2one(comodel_name='res.partner.category',
                                      string='Partner Category',
                                      required=True,
                                      ondelete='cascade')
@@ -159,7 +159,7 @@ We need to add the field ``magento_bind_ids`` in
 
         magento_bind_ids = fields.One2many(
             comodel_name='magento.res.partner.category',
-            inverse_name='openerp_id',
+            inverse_name='odoo_id',
             string='Magento Bindings',
             readonly=True,
         )
@@ -320,7 +320,7 @@ Record Importer
 
 The import of customer groups is so simple that it can use a generic
 class
-:py:class:`openerp.addons.magentoerpconnect.unit.import_synchronizer.SimpleRecordImporter`.
+:py:class:`odoo.addons.magentoerpconnect.unit.import_synchronizer.SimpleRecordImporter`.
 We just need to add the model in the ``_model_name`` attribute::
 
     @magento
@@ -339,7 +339,7 @@ to use some of the hooks to change the behavior
 (``_import_dependencies``, ``_after_import`` for example).
 Refers to the importers already created in the module and to the base
 class
-:py:class:`openerp.addons.magentoerpconnect.unit.import_synchronizer.MagentoImporter`.
+:py:class:`odoo.addons.magentoerpconnect.unit.import_synchronizer.MagentoImporter`.
 
 The synchronizer asks to the appropriate :py:class:`~connector.unit.mapper.Mapper`  to transform the data
 (in ``_map_data``). Here is how we'll create the :py:class:`~connector.unit.mapper.Mapper`.
@@ -382,7 +382,7 @@ Binder
 
 For the last piece of the construct, it will be an easy one, because
 normally all the Magento Models will use the same Binder, the so called
-:py:class:`~openerp.addons.magentoerpconnect.unit.binder.MagentoModelBinder`.
+:py:class:`~odoo.addons.magentoerpconnect.unit.binder.MagentoModelBinder`.
 
 We just need to add our model in the ``_model_name`` attribute::
 

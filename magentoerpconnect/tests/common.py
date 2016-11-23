@@ -26,12 +26,12 @@ Helpers usable in the tests
 import importlib
 import mock
 from contextlib import contextmanager
-import openerp.tests.common as common
-from openerp.addons.connector.session import ConnectorSession
-from openerp.addons.magentoerpconnect.unit.import_synchronizer import (
+import odoo.tests.common as common
+from odoo.addons.connector.session import ConnectorSession
+from odoo.addons.magentoerpconnect.unit.import_synchronizer import (
     import_batch,
 )
-from openerp.addons.magentoerpconnect.unit.backend_adapter import call_to_key
+from odoo.addons.magentoerpconnect.unit.backend_adapter import call_to_key
 from .data_base import magento_base_responses
 
 
@@ -75,7 +75,7 @@ def mock_job_delay_to_direct(job_path):
 
     job_path is the python path, such as::
 
-      openerp.addons.magentoerpconnect.stock_picking.export_picking_done
+      odoo.addons.magentoerpconnect.stock_picking.export_picking_done
 
     """
     job_module, job_name = job_path.rsplit('.', 1)

@@ -19,11 +19,11 @@
 #
 ##############################################################################
 
-from openerp.addons.connector.event import (on_record_write,
+from odoo.addons.connector.event import (on_record_write,
                                             on_record_create,
                                             on_record_unlink
                                             )
-import openerp.addons.magentoerpconnect.consumer as magentoerpconnect
+import odoo.addons.magentoerpconnect.consumer as magentoerpconnect
 
 
 @on_record_create(model_names=['magento.address', 'magento.res.partner'])

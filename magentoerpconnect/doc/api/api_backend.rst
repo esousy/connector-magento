@@ -1,7 +1,7 @@
 Backend
 =======
 
-.. automodule:: openerp.addons.magentoerpconnect.backend
+.. automodule:: odoo.addons.magentoerpconnect.backend
    :members:
    :undoc-members:
    :show-inheritance:

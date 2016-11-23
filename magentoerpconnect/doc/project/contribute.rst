@@ -43,12 +43,12 @@ and follow the installation steps.
 
 .. warning:: System dependencies to build the eggs: libxml2-dev libxslt1-dev
              that you need to install with apt-get, yum, ...
-             You can also use http://pythonhosted.org/anybox.recipe.openerp/first_steps.html#installing-build-dependencies
+             You can also use http://pythonhosted.org/anybox.recipe.odoo/first_steps.html#installing-build-dependencies
 
 Head over the next sections to discover the included tools
 
 .. _Buildout: http://www.buildout.org
-.. _`Anybox Buildout Recipe`: https://pypi.python.org/pypi/anybox.recipe.openerp
+.. _`Anybox Buildout Recipe`: https://pypi.python.org/pypi/anybox.recipe.odoo
 
 Start Odoo
 ==========
@@ -57,11 +57,11 @@ All the commands are launched from the root directory of the buildout.
 
 In standalone mode (jobs will be threaded)::
 
-    $ bin/start_openerp
+    $ bin/start_odoo
 
 With workers (multiprocessing), you need to start dedicated Connector Workers for the jobs::
 
-    $ bin/start_openerp --workers=4
+    $ bin/start_odoo --workers=4
     $ bin/start_connector_worker --workers=2
 
 Start with Supervisord
@@ -230,11 +230,11 @@ In ``magentoerpconnect/unit/backend_adapter.py`` at lines 130,130:
                               method, arguments, result)
                 return result
 
-Uncomment the line doing a call to :py:func:`~openerp.addons.magentoerpconnect.unit.backend_adapter.record()`.
+Uncomment the line doing a call to :py:func:`~odoo.addons.magentoerpconnect.unit.backend_adapter.record()`.
 Then, as soon as you will start the server, all the requests and responses
 will be stored in global dict. Once you have recorded some exchanges, you can
 output them using a tool such as `ERPpeek`_ and by calling the method
-:py:class:`~openerp.addons.magentoerpconnect.magento_model.magento_backend.output_recorder`:
+:py:class:`~odoo.addons.magentoerpconnect.magento_model.magento_backend.output_recorder`:
 
 .. code-block:: python
 
@@ -243,7 +243,7 @@ output them using a tool such as `ERPpeek`_ and by calling the method
 A path is returned with the location of the file.
 
 When you want to use a set of test data in a test, just use
-:py:func:`~openerp.addons.magentoerpconnect.tests.common.mock_api()`:
+:py:func:`~odoo.addons.magentoerpconnect.tests.common.mock_api()`:
 
 .. code-block:: python
 
@@ -262,6 +262,6 @@ See how to `Run the tests`_
 Useful links:
 
 * unittest documentation: http://docs.python.org/dev/library/unittest.html
-* Odoo's documentation on tests: https://doc.openerp.com/trunk/server/05_test_framework/
+* Odoo's documentation on tests: https://doc.odoo.com/trunk/server/05_test_framework/
 
 .. _`ERPpeek`: https://erppeek.readthedocs.org/en/latest/

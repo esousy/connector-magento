@@ -19,11 +19,11 @@
 #
 ##############################################################################
 
-from openerp.addons.magentoerpconnect.unit.import_synchronizer import (
+from odoo.addons.magentoerpconnect.unit.import_synchronizer import (
     import_batch,
     import_record)
-from openerp.addons.connector.session import ConnectorSession
-import openerp.tests.common as common
+from odoo.addons.connector.session import ConnectorSession
+import odoo.tests.common as common
 from .common import mock_api
 from .data_base import magento_base_responses
 from .data_address_book import (no_address,

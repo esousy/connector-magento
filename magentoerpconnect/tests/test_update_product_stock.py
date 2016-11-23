@@ -21,7 +21,7 @@
 
 import mock
 
-from openerp.addons.magentoerpconnect.unit.import_synchronizer import (
+from odoo.addons.magentoerpconnect.unit.import_synchronizer import (
     import_record)
 from .common import (mock_api,
                      mock_job_delay_to_direct,
@@ -54,7 +54,7 @@ class TestUpdateStockQty(SetUpMagentoSynchronized):
         self.assertEqual(len(self.binding_product), 1)
 
     def test_compute_new_qty(self):
-        product = self.binding_product.openerp_id
+        product = self.binding_product.odoo_id
         binding = self.binding_product
         # start with 0
         self.assertEqual(product.virtual_available, 0.0)
@@ -71,7 +71,7 @@ class TestUpdateStockQty(SetUpMagentoSynchronized):
         # search for the new quantities to push to Magento
         # we mock the job so we can check it .delay() is called on it
         # when the quantity is changed
-        patched = ('openerp.addons.magentoerpconnect.'
+        patched = ('odoo.addons.magentoerpconnect.'
                    'product.export_product_inventory')
         with mock.patch(patched) as export_product_inventory:
             binding.recompute_magento_qty()
@@ -86,7 +86,7 @@ class TestUpdateStockQty(SetUpMagentoSynchronized):
     def test_compute_new_qty_different_field(self):
         stock_field = self.env.ref('stock.field_product_product_qty_available')
         self.backend.product_stock_field_id = stock_field
-        product = self.binding_product.openerp_id
+        product = self.binding_product.odoo_id
         binding = self.binding_product
         # start with 0
         self.assertEqual(product.qty_available, 0.0)
@@ -123,7 +123,7 @@ class TestUpdateStockQty(SetUpMagentoSynchronized):
         # search for the new quantities to push to Magento
         # we mock the job so we can check it .delay() is called on it
         # when the quantity is changed
-        patched = ('openerp.addons.magentoerpconnect.'
+        patched = ('odoo.addons.magentoerpconnect.'
                    'product.export_product_inventory')
         with mock.patch(patched) as export_product_inventory:
             binding.recompute_magento_qty()
@@ -138,10 +138,10 @@ class TestUpdateStockQty(SetUpMagentoSynchronized):
                 fields=['magento_qty'])
 
     def test_export_qty_api(self):
-        product = self.binding_product.openerp_id
+        product = self.binding_product.odoo_id
         binding = self.binding_product
 
-        job_path = ('openerp.addons.magentoerpconnect.'
+        job_path = ('odoo.addons.magentoerpconnect.'
                     'product.export_product_inventory')
         response = {
             'oerp_cataloginventory_stock_item.update': True,
@@ -167,7 +167,7 @@ class TestUpdateStockQty(SetUpMagentoSynchronized):
 
     def test_export_qty_api_on_write(self):
 
-        job_path = ('openerp.addons.magentoerpconnect.'
+        job_path = ('odoo.addons.magentoerpconnect.'
                     'product.export_product_inventory')
         response = {
             'oerp_cataloginventory_stock_item.update': True,

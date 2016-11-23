@@ -19,9 +19,9 @@
 #
 ##############################################################################
 
-from openerp import models, fields
-from openerp.addons.connector.connector import ConnectorEnvironment
-from openerp.addons.connector.checkpoint import checkpoint
+from odoo import models, fields
+from odoo.addons.connector.connector import ConnectorEnvironment
+from odoo.addons.connector.checkpoint import checkpoint
 
 
 def get_environment(session, model_name, backend_id):
@@ -40,7 +40,7 @@ def get_environment(session, model_name, backend_id):
 class MagentoBinding(models.AbstractModel):
     """ Abstract Model for the Bindigs.
 
-    All the models used as bindings between Magento and OpenERP
+    All the models used as bindings between Magento and Odoo
     (``magento.res.partner``, ``magento.product.product``, ...) should
     ``_inherit`` it.
     """
@@ -48,7 +48,7 @@ class MagentoBinding(models.AbstractModel):
     _inherit = 'external.binding'
     _description = 'Magento Binding (abstract)'
 
-    # openerp_id = openerp-side id must be declared in concrete model
+    # odoo_id = odoo-side id must be declared in concrete model
     backend_id = fields.Many2one(
         comodel_name='magento.backend',
         string='Magento Backend',
@@ -69,7 +69,7 @@ def add_checkpoint(session, model_name, record_id, backend_id):
     meaning it has to be reviewed by a user.
 
     :param session: current session
-    :type session: :class:`openerp.addons.connector.session.ConnectorSession`
+    :type session: :class:`odoo.addons.connector.session.ConnectorSession`
     :param model_name: name of the model of the record to be reviewed
     :type model_name: str
     :param record_id: ID of the record to be reviewed
